@@ -40,7 +40,7 @@
     </div>
   </div>
 <script>
-// URLからパラメーターを取得する
+// URLからパラメーターを取得する関数
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -52,11 +52,13 @@ function getParameterByName(name, url) {
 }
 
 // 入力フィールドに値を設定する
-var inputValue = getParameterByName('input');
-if(inputValue !== null) {
-    document.getElementById('inputField').value = inputValue;
-}
-
+var inputFields = document.querySelectorAll('.inputField'); // 全ての.inputFieldクラスを持つ要素を取得
+inputFields.forEach(function(inputField) {
+    var inputValue = getParameterByName(inputField.name);
+    if(inputValue !== null) {
+        inputField.value = inputValue;
+    }
+});
 
 function generateCSSRule() {
   var inputText = document.getElementById("textInput").value;
