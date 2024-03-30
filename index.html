@@ -13,19 +13,19 @@
         <div style="display: flex; flex-direction: column; align-items: flex-end;">
           <div>
             <label for="textInput">ユーザID:</label>
-            <input type="text" id="textInput" name="userId">
+            <input type="text" id="textInput" name="userId" class="inputField">
           </div>
           <div>
             <label for="textInput2">ベース画像URL:</label>
-            <input type="text" id="textInput2" name="baseImage">
+            <input type="text" id="textInput2" name="baseImage" class="inputField">
           </div>
           <div>
             <label for="textInput3">パターン1画像URL:</label>
-            <input type="text" id="textInput3" name="pattern1Image">
+            <input type="text" id="textInput3" name="pattern1Image" class="inputField">
           </div>
           <div>
             <label for="textInput4">パターン2画像URL:</label>
-            <input type="text" id="textInput4" name="pattern2Image">
+            <input type="text" id="textInput4" name="pattern2Image" class="inputField">
           </div>
         </div>
       </form>
@@ -40,6 +40,24 @@
     </div>
   </div>
 <script>
+// URLからパラメーターを取得する
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+// 入力フィールドに値を設定する
+var inputValue = getParameterByName('input');
+if(inputValue !== null) {
+    document.getElementById('inputField').value = inputValue;
+}
+
+
 function generateCSSRule() {
   var inputText = document.getElementById("textInput").value;
   var inputText2 = document.getElementById("textInput2").value;
